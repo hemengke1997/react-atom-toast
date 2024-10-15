@@ -7,7 +7,7 @@ export interface Options {
   transition?:
     | PresetTransitionName
     | {
-        name: PresetTransitionName
+        name?: PresetTransitionName
         duration?: number
         exitDuration?: number
       }
@@ -15,6 +15,7 @@ export interface Options {
   className?: string
   maxCount?: number
   gap?: number
+  renderer?: (children: ReactNode) => ReactNode
 }
 
 export interface ToastOptions extends Options {

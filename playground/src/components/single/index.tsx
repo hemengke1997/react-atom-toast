@@ -8,8 +8,11 @@ export default function Single() {
         onClick={() => {
           toast.open({
             content: `Hello, world! ${Math.random()}`,
-            key: 'single',
             maxCount: 1,
+            transition: {
+              name: 'fade',
+              duration: 1000,
+            },
           })
         }}
       >

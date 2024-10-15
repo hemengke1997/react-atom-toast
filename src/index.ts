@@ -1,5 +1,6 @@
 import { ToastQueue } from './toast-queue'
 import { type Options, type ToastOptions, type ToastUpdateOptions } from './types'
+import { omitUndefined } from './utils'
 import './index.css'
 
 class Toast {
@@ -9,6 +10,7 @@ class Toast {
     transition: 'fade',
     maxCount: 3,
     gap: 16,
+    renderer: (children) => children,
   }
 
   private toastQueue: ToastQueue
@@ -42,7 +44,7 @@ class Toast {
   setDefaultOptions(options: Options) {
     this.defaultOptions = {
       ...this.defaultOptions,
-      ...options,
+      ...omitUndefined(options),
     }
   }
 }

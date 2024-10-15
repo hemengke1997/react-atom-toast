@@ -21,8 +21,15 @@ export class ToastQueue {
       return
     }
 
-    if (maxCount && this.toasts.length >= maxCount) {
-      this.close(this.toasts.filter((t) => t.open === true)[0]?.key)
+    const visibleToasts = this.toasts.filter((t) => t.open === true)
+    if (maxCount && visibleToasts.length >= maxCount) {
+      if (maxCount === 1) {
+        // There is only one toast, update it
+        this.update(visibleToasts[visibleToasts.length - 1].key!, { ...options, open: true })
+        return
+      } else {
+        this.close(visibleToasts[0]?.key)
+      }
     }
 
     const toastOptions: InternalToastOptions = {
@@ -70,6 +77,7 @@ export class ToastQueue {
         updateFlag: !this.toasts[index].updateFlag,
       }
     }
+
     this.render()
   }
 }

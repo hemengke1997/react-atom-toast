@@ -1,10 +1,12 @@
-import { useMemo, useRef, useState } from 'react'
+import { useCallback, useMemo, useRef } from 'react'
 import { Transition } from 'react-transition-preset'
-import useIsomorphicLayoutEffect from '../hooks/useIsomorphicLayoutEffect'
+import useControlledState from '../hooks/use-controlled-state'
+import useIsomorphicLayoutEffect from '../hooks/use-isomorphic-layout-effect'
 import { type InternalToastOptions } from '../types'
 import { classnames } from '../utils'
 
 type Props = InternalToastOptions & {
+  onOpenChange: (open: boolean) => void
   onEnter: (height: number) => void
   onExit: (height: number) => void
   offsetHeight: number
@@ -16,6 +18,7 @@ function Toast(props: Props) {
     content,
     className,
     duration,
+    onOpenChange,
     onClosed,
     pauseOnHover,
     hover,
@@ -39,59 +42,62 @@ function Toast(props: Props) {
   }, [_transition])
   const timer = useRef<number>()
   const ref = useRef<HTMLDivElement>(null)
-  const [open, setOpen] = useState(!!_open)
+  const [open, setOpen] = useControlledState({
+    defaultValue: !!_open,
+    value: _open,
+    onChange: (value) => {
+      onOpenChange(value)
+    },
+  })
 
-  useIsomorphicLayoutEffect(() => {
-    if (typeof _open === 'boolean') {
-      setOpen(!!_open)
-    }
-  }, [_open])
-
-  const delayClear = () => {
+  const delayClear = useCallback(() => {
     if (duration) {
       timer.current && clearTimeout(timer.current)
       timer.current = window.setTimeout(() => {
         setOpen(false)
       }, +duration!)
     }
-  }
+  }, [duration, setOpen])
 
-  const onMouseHover = (hover: boolean) => {
-    if (!pauseOnHover || !open) return
-    if (hover) {
-      timer.current && clearTimeout(timer.current)
-    } else {
-      delayClear()
-    }
-  }
+  const onMouseHover = useCallback(
+    (hover: boolean) => {
+      if (!pauseOnHover || !open) return
+      if (hover) {
+        timer.current && clearTimeout(timer.current)
+      } else {
+        delayClear()
+      }
+    },
+    [open, pauseOnHover, delayClear],
+  )
 
   useIsomorphicLayoutEffect(() => {
     onMouseHover(hover)
   }, [hover])
 
-  const onEnter = () => {
+  const onEnter = useCallback(() => {
     if (!ref.current) return
     const height = ref.current.clientHeight
     _onEnter(height)
-  }
+  }, [_onEnter])
 
-  const onExit = () => {
+  const onExit = useCallback(() => {
     const height = ref.current?.clientHeight
     _onExit(height || 0)
-  }
+  }, [_onExit])
 
-  const onExited = () => {
+  const onExited = useCallback(() => {
     onClosed?.()
-  }
+  }, [onClosed])
 
-  const resolveTransform = (transform: string | undefined, offsetHeight: number) => {
+  const resolveTransform = useCallback((transform: string | undefined, offsetHeight: number) => {
     const internalTransform = `translate(-50%, calc(-50% - ${offsetHeight}px))`
     return [internalTransform, transform].filter(Boolean).join(' ')
-  }
+  }, [])
 
-  const resolveTransformProperty = (transform: string | undefined) => {
+  const resolveTransformProperty = useCallback((transform: string | undefined) => {
     return [...new Set(['transform', transform])].filter(Boolean).join(', ')
-  }
+  }, [])
 
   useIsomorphicLayoutEffect(() => {
     delayClear()

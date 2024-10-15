@@ -65,7 +65,7 @@ function ToastContainer(props: Props) {
       className={'toast__container'}
     >
       {toasts.map((toast, index) =>
-        toast.renderer!(
+        toast.render!(
           <Toast
             key={toast.key}
             onOpenChange={(open) => onOpenChange(toast.key!, open)}

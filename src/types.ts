@@ -15,7 +15,7 @@ export interface Options {
   className?: string
   maxCount?: number
   gap?: number
-  renderer?: (children: ReactNode) => ReactNode
+  render?: (children: ReactNode) => ReactNode
 }
 
 export interface ToastOptions extends Options {

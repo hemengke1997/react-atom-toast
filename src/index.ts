@@ -10,7 +10,7 @@ class Toast {
     transition: 'fade',
     maxCount: 3,
     gap: 16,
-    renderer: (children) => children,
+    render: (children) => children,
   }
 
   private toastQueue: ToastQueue

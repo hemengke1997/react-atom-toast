@@ -8,6 +8,7 @@ import { classnames } from '../utils'
 type Props = InternalToastOptions & {
   onOpenChange: (open: boolean) => void
   onEnter: (height: number) => void
+  onUpdate: (height: number) => void
   onExit: (height: number) => void
   offsetHeight: number
   hover: boolean
@@ -26,9 +27,12 @@ function Toast(props: Props) {
     transition: _transition,
     open: _open,
     onEnter: _onEnter,
+    onUpdate: _onUpdate,
     onExit: _onExit,
     offsetHeight,
   } = props
+
+  const didMount = useRef(false)
 
   const transition = useMemo(() => {
     if (typeof _transition === 'string') {
@@ -81,6 +85,11 @@ function Toast(props: Props) {
     _onEnter(height)
   }, [_onEnter])
 
+  const onUpdate = useCallback(() => {
+    const height = ref.current?.clientHeight
+    _onUpdate(height || 0)
+  }, [_onUpdate])
+
   const onExit = useCallback(() => {
     const height = ref.current?.clientHeight
     _onExit(height || 0)
@@ -100,6 +109,11 @@ function Toast(props: Props) {
   }, [])
 
   useIsomorphicLayoutEffect(() => {
+    if (!didMount.current) {
+      didMount.current = true
+    } else {
+      onUpdate()
+    }
     delayClear()
     return () => {
       timer.current && clearTimeout(timer.current)

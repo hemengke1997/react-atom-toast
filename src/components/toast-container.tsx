@@ -22,6 +22,8 @@ function ToastContainer(props: Props) {
     })
   }, [])
 
+  const onUpdate = onEnter
+
   const onExit = useCallback((key: string) => {
     setHeightMap((prev) => {
       prev.delete(key)
@@ -39,7 +41,9 @@ function ToastContainer(props: Props) {
       }
 
       for (let i = start; i > index; i--) {
-        offset += (heightMap.get(toasts[i].key!) || 0) + toasts[i].gap!
+        const currentToastHeight = heightMap.get(toasts[i].key!) || 0
+        const nextToastHeight = heightMap.get(toasts[i - 1].key!) || 0
+        offset += nextToastHeight / 2 + currentToastHeight / 2 + toasts[index].gap!
       }
 
       return offset
@@ -69,8 +73,11 @@ function ToastContainer(props: Props) {
           <Toast
             key={toast.key}
             onOpenChange={(open) => onOpenChange(toast.key!, open)}
-            onEnter={(size) => {
-              onEnter(toast.key!, size)
+            onEnter={(height) => {
+              onEnter(toast.key!, height)
+            }}
+            onUpdate={(height) => {
+              onUpdate(toast.key!, height)
             }}
             onExit={() => {
               onExit(toast.key!)

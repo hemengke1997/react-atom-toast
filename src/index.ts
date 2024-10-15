@@ -36,7 +36,6 @@ class Toast {
 
   update(key: string, options: ToastUpdateOptions) {
     this.toastQueue.update(key, {
-      ...this.defaultOptions,
       ...options,
     })
   }

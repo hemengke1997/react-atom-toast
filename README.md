@@ -50,6 +50,5 @@ import { toast } from 'react-atom-toast'
 toast({
   content: 'Hello, world!',
   maxCount: 1,
-  key: 'unique-key',
 })
 ```

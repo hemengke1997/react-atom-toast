@@ -1,3 +1,12 @@
+## [1.2.1](https://github.com/hemengke1997/react-atom-toast/compare/v1.2.0...v1.2.1) (2024-10-15)
+
+
+### Bug Fixes
+
+* offset height compute error on content update ([9ffe1fd](https://github.com/hemengke1997/react-atom-toast/commit/9ffe1fd0b9fb36ffcd450db8da9a745a2f095287))
+
+
+
 # [1.2.0](https://github.com/hemengke1997/react-atom-toast/compare/v1.1.0...v1.2.0) (2024-10-15)
 
 

@@ -1,3 +1,12 @@
+## [1.2.2](https://github.com/hemengke1997/react-atom-toast/compare/v1.2.1...v1.2.2) (2024-10-31)
+
+
+### Bug Fixes
+
+* auto import css ([1d0b137](https://github.com/hemengke1997/react-atom-toast/commit/1d0b137013f776ca59f01e8c8954ac5ea9f56ecf))
+
+
+
 ## [1.2.1](https://github.com/hemengke1997/react-atom-toast/compare/v1.2.0...v1.2.1) (2024-10-15)
 
 

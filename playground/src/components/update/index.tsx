@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { toast } from 'react-atom-toast'
-import { Button, Card } from 'antd'
+import { Button, Card, Space } from 'antd'
 
 function generateRandomArray() {
   const length = Math.floor(Math.random() * 5) + 1
@@ -17,32 +17,34 @@ export default function Update() {
   const [keys, setKeys] = useState<string[]>([])
 
   return (
-    <Card title={'更新toast'}>
-      <Button
-        onClick={() => {
-          const k = `update-${Math.random()}`
-          toast.open({
-            content: generateRandomArray(),
-            key: k,
-            onClosed: () => {
-              setKeys((prev) => prev.filter((key) => key !== k))
-            },
-          })
-          setKeys((prev) => [...prev, k])
-        }}
-      >
-        open
-      </Button>
-      <Button
-        type={'default'}
-        onClick={() => {
-          toast.update(keys[keys.length - 1], {
-            content: generateRandomArray(),
-          })
-        }}
-      >
-        update
-      </Button>
+    <Card title={'Dynamic Update'}>
+      <Space>
+        <Button
+          onClick={() => {
+            const k = `update-${Math.random()}`
+            toast.open({
+              content: generateRandomArray(),
+              key: k,
+              onClosed: () => {
+                setKeys((prev) => prev.filter((key) => key !== k))
+              },
+            })
+            setKeys((prev) => [...prev, k])
+          }}
+        >
+          open
+        </Button>
+        <Button
+          type={'default'}
+          onClick={() => {
+            toast.update(keys[keys.length - 1], {
+              content: generateRandomArray(),
+            })
+          }}
+        >
+          update
+        </Button>
+      </Space>
     </Card>
   )
 }

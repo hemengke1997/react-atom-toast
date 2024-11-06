@@ -12,7 +12,7 @@ toast.setDefaultOptions({
 function App() {
   return (
     <div className={'flex min-h-screen flex-col items-center justify-center'}>
-      <h1 className={'m-2 text-3xl font-bold'}>
+      <h1 className={'mb-8 text-3xl font-bold'}>
         <a href='https://github.com/hemengke1997/react-atom-toast' target={'_blank'}>
           react-atom-toast
         </a>

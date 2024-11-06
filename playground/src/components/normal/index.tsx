@@ -3,7 +3,7 @@ import { Button, Card } from 'antd'
 
 export default function Normal() {
   return (
-    <Card title={'默认toast'}>
+    <Card title={'Default Toast'}>
       <Button
         onClick={() => {
           toast.open({

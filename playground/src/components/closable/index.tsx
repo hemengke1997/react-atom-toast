@@ -4,7 +4,7 @@ import { Button, Card } from 'antd'
 export default function Closable() {
   const key = 'closable'
   return (
-    <Card title={'可关闭'}>
+    <Card title={'Closable'}>
       <div className={'flex gap-2'}>
         <Button
           onClick={() => {

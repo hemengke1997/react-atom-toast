@@ -52,3 +52,71 @@ toast({
   maxCount: 1,
 })
 ```
+
+## Options
+
+### duration
+
+- **Type:** `number`
+- **Default:** `2000`
+
+The duration of the toast.
+
+### className
+
+- **Type:** `string`
+- **Default:** `''`
+
+The class name of the toast.
+
+react-atom-toast is headless, you need to style it yourself.
+
+```tsx
+import { toast } from 'react-atom-toast'
+
+toast.setDefaultOptions({
+  className: 'bg-cyan-400 p-2 rounded',
+})
+```
+
+### transition
+
+- **Type:** `PresetTransitionName
+    | {
+        name?: PresetTransitionName
+        duration?: number
+        exitDuration?: number
+      }`
+- **Default:** `fade-up`
+
+The transition of the toast. Read [react-transition-preset](https://github.com/hemengke1997/react-transition-preset) to learn more.
+
+### pauseOnHover
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+Prevent the toast from disappearing when hovering.
+
+### maxCount
+
+- **Type:** `number`
+- **Default:** `3`
+
+The maximum number of toasts that can be displayed at the same time.
+
+If set to `1`, the new toast will replace the old one.
+
+### gap
+
+- **Type:** `number`
+- **Default:** `16`
+
+The gap between toasts.
+
+
+### render
+
+- **Type:** `(children: ReactNode) => ReactNode`
+
+Enhance the toast rendering. Useful for react context.

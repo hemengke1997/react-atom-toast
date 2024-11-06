@@ -9,3 +9,7 @@
   background-color: #000;
   color: #fff;
 }
+
+.ant-card-body {
+  @apply flex justify-center;
+}

@@ -3,7 +3,7 @@ import { Button, Card } from 'antd'
 
 export default function Single() {
   return (
-    <Card title={'单个toast'}>
+    <Card title={'Single Toast'}>
       <Button
         onClick={() => {
           toast.open({

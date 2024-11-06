@@ -3,7 +3,7 @@ import { Button, Card } from 'antd'
 
 export default function Classname() {
   return (
-    <Card title={'修改样式'}>
+    <Card title={'Dynamic Style'}>
       <Button
         onClick={() => {
           toast.open({

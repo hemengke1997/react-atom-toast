@@ -1,3 +1,7 @@
 {
-  "extends": "@minko-fe/tsconfig/tsconfig.lib"
+  "extends": "@minko-fe/tsconfig/tsconfig.lib",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "exclude": ["node_modules", "dist"]
 }

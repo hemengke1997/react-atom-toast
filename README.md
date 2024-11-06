@@ -11,16 +11,13 @@ npm i react-atom-toast
 ## Usage
 
 ### Basic
+
 ```tsx
 import { toast } from 'react-atom-toast'
 
-// There is no built-in styles, you'd customize it yourself
+// toast is headless, you'd customize it yourself
 toast.setDefaultOptions({
   className: 'bg-cyan-400 p-2 rounded',
-})
-
-toast({
-  content: 'Hello, world!',
 })
 ```
 
@@ -34,11 +31,6 @@ import { toast } from 'react-atom-toast'
 toast({
   content: 'Hello, world!',
   transition: 'fade-up',
-  // or
-  // transition: {
-  //   name: 'fade-up',
-  //   duration: 100,
-  // }
 })
 ```
 

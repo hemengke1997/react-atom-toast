@@ -7,7 +7,9 @@
   "keywords": [
     "react-toast",
     "headless",
-    "tiny toast"
+    "tiny-toast",
+    "react-tiny-toast",
+    "toast"
   ],
   "license": "MIT",
   "repository": {

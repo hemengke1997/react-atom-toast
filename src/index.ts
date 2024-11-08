@@ -1,7 +1,6 @@
 import { ToastQueue } from './toast-queue'
 import { type Options, type ToastOptions, type ToastUpdateOptions } from './types'
 import { omitUndefined } from './utils'
-import './index.css'
 
 class Toast {
   private defaultOptions: Options = {

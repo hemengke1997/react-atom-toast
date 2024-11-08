@@ -17,7 +17,7 @@ import { toast } from 'react-atom-toast'
 
 // toast is headless, you'd customize it yourself
 toast.setDefaultOptions({
-  className: 'bg-cyan-400 p-2 rounded',
+  className: 'bg-red p-2 rounded',
 })
 ```
 
@@ -57,7 +57,6 @@ The duration of the toast.
 ### className
 
 - **Type:** `string`
-- **Default:** `''`
 
 The class name of the toast.
 
@@ -67,7 +66,7 @@ react-atom-toast is headless, you need to style it yourself.
 import { toast } from 'react-atom-toast'
 
 toast.setDefaultOptions({
-  className: 'bg-cyan-400 p-2 rounded',
+  className: 'bg-black bg-opacity-90 p-2 rounded',
 })
 ```
 

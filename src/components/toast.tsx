@@ -18,6 +18,7 @@ function Toast(props: Props) {
   const {
     content,
     className,
+    style,
     duration,
     onOpenChange,
     onClosed,
@@ -131,6 +132,11 @@ function Toast(props: Props) {
       {(styles) => (
         <div
           style={{
+            position: 'fixed',
+            zIndex: 9999,
+            top: '50%',
+            left: '50%',
+            ...style,
             ...styles,
             transitionProperty: resolveTransformProperty(styles.transitionProperty),
             transform: resolveTransform(styles.transform, offsetHeight),

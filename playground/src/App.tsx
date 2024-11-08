@@ -6,7 +6,7 @@ import Single from './components/single'
 import Update from './components/update'
 
 toast.setDefaultOptions({
-  className: 'bg-cyan-400 p-2 rounded',
+  className: 'bg-white bg-opacity-95 p-2 rounded text-black',
 })
 
 function App() {

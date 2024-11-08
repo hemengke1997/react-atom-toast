@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react'
+import { type CSSProperties, type ReactNode } from 'react'
 import { type PresetTransitionName } from 'react-transition-preset'
 
 export interface Options {
@@ -13,6 +13,7 @@ export interface Options {
       }
   pauseOnHover?: boolean
   className?: string
+  style?: CSSProperties
   maxCount?: number
   gap?: number
   render?: (children: ReactNode) => ReactNode

@@ -1,3 +1,12 @@
+## [1.3.1](https://github.com/hemengke1997/react-atom-toast/compare/v1.3.0...v1.3.1) (2024-11-13)
+
+
+### Bug Fixes
+
+* onClosed not working and render infinite loop ([a5f00d1](https://github.com/hemengke1997/react-atom-toast/commit/a5f00d15be6a30c23a11fdab86eb22a1e05ed3ff))
+
+
+
 # [1.3.0](https://github.com/hemengke1997/react-atom-toast/compare/v1.2.2...v1.3.0) (2024-11-08)
 
 

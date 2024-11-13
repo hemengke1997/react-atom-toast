@@ -6,7 +6,7 @@ function generateRandomArray() {
   const length = Math.floor(Math.random() * 5) + 1
   return Array.from({ length }, () => Math.random()).map((item) => {
     return (
-      <div className={'flex flex-col gap-2'}>
+      <div className={'flex flex-col gap-2'} key={item}>
         <div key={item}>{item}</div>
       </div>
     )

@@ -11,6 +11,9 @@ export class Renderer {
 
   constructor(queue: ToastQueue) {
     this.queue = queue
+  }
+
+  createContainer() {
     if (isBrowser()) {
       let container = document.getElementById(this.containerID)
 
@@ -25,10 +28,24 @@ export class Renderer {
   }
 
   render(toasts: InternalToastOptions[]) {
-    if (!this.container) {
+    if (!toasts.length && this.container) {
+      this.container.remove()
+      this.container = null
       return
     }
 
-    mount(<ToastContainer toasts={toasts} queue={this.queue} />, this.container)
+    this.createContainer()
+    if (!this.container) return
+
+    mount(
+      <ToastContainer
+        toasts={toasts}
+        onClosed={(key) => this.queue.remove(key)}
+        onOpenChange={(key, open) => {
+          this.queue.update(key, { open })
+        }}
+      />,
+      this.container,
+    )
   }
 }

@@ -60,6 +60,7 @@ function Toast(props: Props) {
       timer.current && clearTimeout(timer.current)
       timer.current = window.setTimeout(() => {
         setOpen(false)
+        timer.current && clearTimeout(timer.current)
       }, +duration!)
     }
   }, [duration, setOpen])

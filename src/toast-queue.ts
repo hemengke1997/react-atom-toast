@@ -45,7 +45,6 @@ export class ToastQueue {
   close(key: string | undefined) {
     if (!key) return
     this.update(key, { open: false })
-    this.render()
   }
 
   closeAll() {
@@ -58,7 +57,6 @@ export class ToastQueue {
 
   remove(key: string | undefined) {
     this.toasts = this.toasts.filter((toastOptions) => toastOptions.key !== key)
-
     this.render()
   }
 
@@ -76,8 +74,7 @@ export class ToastQueue {
         ...options,
         updateFlag: !this.toasts[index].updateFlag,
       }
+      this.render()
     }
-
-    this.render()
   }
 }

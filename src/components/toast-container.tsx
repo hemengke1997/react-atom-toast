@@ -1,16 +1,16 @@
 import { useCallback, useState } from 'react'
-import { type ToastQueue } from '../toast-queue'
 import { type InternalToastOptions } from '../types'
 import { omit } from '../utils'
 import Toast from './toast'
 
 type Props = {
-  queue: ToastQueue
   toasts: InternalToastOptions[]
+  onClosed: (key: string) => void
+  onOpenChange: (key: string, open: boolean) => void
 }
 
 function ToastContainer(props: Props) {
-  const { toasts, queue } = props
+  const { toasts, onClosed, onOpenChange } = props
 
   const [hoverState, setHoverState] = useState(false)
   const [heightMap, setHeightMap] = useState(new Map<string, number>())
@@ -51,13 +51,6 @@ function ToastContainer(props: Props) {
     [heightMap, toasts],
   )
 
-  const onOpenChange = useCallback(
-    (key: string, open: boolean) => {
-      queue.update(key, { open })
-    },
-    [queue],
-  )
-
   return (
     <div
       onMouseEnter={() => {
@@ -71,6 +64,7 @@ function ToastContainer(props: Props) {
       {toasts.map((toast, index) =>
         toast.render!(
           <Toast
+            {...omit(toast, ['key'])}
             key={toast.key}
             onOpenChange={(open) => onOpenChange(toast.key!, open)}
             onEnter={(height) => {
@@ -84,11 +78,10 @@ function ToastContainer(props: Props) {
             }}
             onClosed={() => {
               toast.onClosed?.()
-              queue.remove(toast.key)
+              onClosed(toast.key!)
             }}
             hover={hoverState}
             offsetHeight={offsetHeight(toast, index)}
-            {...omit(toast, ['key'])}
           />,
         ),
       )}

@@ -1,3 +1,12 @@
+## [1.3.2](https://github.com/hemengke1997/react-atom-toast/compare/v1.3.1...v1.3.2) (2024-11-13)
+
+
+### Bug Fixes
+
+* edge case ([cc35cf4](https://github.com/hemengke1997/react-atom-toast/commit/cc35cf4597231619ca658c24e02a81558857ef5b))
+
+
+
 ## [1.3.1](https://github.com/hemengke1997/react-atom-toast/compare/v1.3.0...v1.3.1) (2024-11-13)
 
 

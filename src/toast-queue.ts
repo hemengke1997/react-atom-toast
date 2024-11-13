@@ -24,7 +24,9 @@ export class ToastQueue {
     const visibleToasts = this.toasts.filter((t) => t.open === true)
     if (maxCount && visibleToasts.length >= maxCount) {
       if (maxCount === 1) {
-        // There is only one toast, update it
+        for (let i = 0; i < visibleToasts.length - 1; i++) {
+          this.remove(visibleToasts[i].key)
+        }
         this.update(visibleToasts[visibleToasts.length - 1].key!, { ...options, open: true })
         return
       } else {

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { type InternalToastOptions } from '../types'
 import { omit } from '../utils'
 import Toast from './toast'
@@ -15,41 +15,36 @@ function ToastContainer(props: Props) {
   const [hoverState, setHoverState] = useState(false)
   const [heightMap, setHeightMap] = useState(new Map<string, number>())
 
-  const onEnter = useCallback((key: string, height: number) => {
+  const onEnter = (key: string, height: number) => {
     setHeightMap((prev) => {
       prev.set(key, height)
       return new Map(prev)
     })
-  }, [])
+  }
 
   const onUpdate = onEnter
 
-  const onExit = useCallback((key: string) => {
+  const onExited = (key: string) => {
     setHeightMap((prev) => {
       prev.delete(key)
       return new Map(prev)
     })
-  }, [])
+  }
 
-  const offsetHeight = useCallback(
-    (toast: InternalToastOptions, index: number) => {
-      let offset = 0
-      let start = toasts.length - 1
+  const offsetHeight = (toast: InternalToastOptions) => {
+    const index = toasts.findIndex((t) => t.key === toast.key)
 
-      if (toasts.length > toasts[index].maxCount! && toast.open === false) {
-        start = start - 1
-      }
+    let offset = 0
+    const start = toasts.length - 1
 
-      for (let i = start; i > index; i--) {
-        const currentToastHeight = heightMap.get(toasts[i].key!) || 0
-        const nextToastHeight = heightMap.get(toasts[i - 1].key!) || 0
-        offset += nextToastHeight / 2 + currentToastHeight / 2 + toasts[index].gap!
-      }
+    for (let i = start; i > index; i--) {
+      const currentToastHeight = heightMap.get(toasts[i].key!) || 0
+      const nextToastHeight = heightMap.get(toasts[i - 1].key!) || 0
+      offset += nextToastHeight / 2 + currentToastHeight / 2 + toasts[index].gap!
+    }
 
-      return offset
-    },
-    [heightMap, toasts],
-  )
+    return offset
+  }
 
   return (
     <div
@@ -61,7 +56,7 @@ function ToastContainer(props: Props) {
       }}
       className={'toast__container'}
     >
-      {toasts.map((toast, index) =>
+      {toasts.map((toast) =>
         toast.render!(
           <Toast
             {...omit(toast, ['key'])}
@@ -73,15 +68,15 @@ function ToastContainer(props: Props) {
             onUpdate={(height) => {
               onUpdate(toast.key!, height)
             }}
-            onExit={() => {
-              onExit(toast.key!)
+            onExited={() => {
+              onExited(toast.key!)
             }}
             onClosed={() => {
               toast.onClosed?.()
               onClosed(toast.key!)
             }}
             hover={hoverState}
-            offsetHeight={offsetHeight(toast, index)}
+            offsetHeight={offsetHeight(toast)}
           />,
         ),
       )}

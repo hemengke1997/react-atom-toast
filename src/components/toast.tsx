@@ -106,6 +106,8 @@ function Toast(props: Props) {
   }
 
   useIsomorphicLayoutEffect(() => {
+    if (!open) return
+
     if (!didMount.current) {
       didMount.current = true
     } else {

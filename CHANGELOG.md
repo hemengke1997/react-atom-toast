@@ -1,3 +1,12 @@
+## [1.3.3](https://github.com/hemengke1997/react-atom-toast/compare/v1.3.2...v1.3.3) (2024-12-31)
+
+
+### Bug Fixes
+
+* toast update status ([37b369c](https://github.com/hemengke1997/react-atom-toast/commit/37b369c05e3b2d8a51a5c9c017d54a5a6afb6cad))
+
+
+
 ## [1.3.2](https://github.com/hemengke1997/react-atom-toast/compare/v1.3.1...v1.3.2) (2024-11-13)
 
 

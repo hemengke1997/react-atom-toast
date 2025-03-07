@@ -1,3 +1,12 @@
+# [1.4.0](https://github.com/hemengke1997/react-atom-toast/compare/v1.3.3...v1.4.0) (2025-03-07)
+
+
+### Features
+
+* toast open support ReactNode ([4ab4dc9](https://github.com/hemengke1997/react-atom-toast/commit/4ab4dc9f86874a713341f5d4232a883fcf3fe1e1))
+
+
+
 ## [1.3.3](https://github.com/hemengke1997/react-atom-toast/compare/v1.3.2...v1.3.3) (2024-12-31)
 
 

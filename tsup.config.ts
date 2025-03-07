@@ -1,13 +1,11 @@
 import { defineConfig, type Options } from 'tsup'
 import { bundleless } from 'tsup-plugin-bundleless'
 
-const commonOptions = (options: Options): Options => ({
+const commonOptions = (_options: Options): Options => ({
   target: 'es2015',
-  external: ['react', 'react-dom'],
   dts: true,
   treeshake: true,
   minify: false,
-  tsconfig: options.watch ? 'tsconfig.dev.json' : 'tsconfig.json',
 })
 
 export default defineConfig((options) => [

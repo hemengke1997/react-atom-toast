@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import useMemoizedFn from '@/hooks/use-memoized-fn'
 import { type InternalToastOptions } from '../types'
 import { omit } from '../utils'
 import Toast from './toast'
@@ -15,23 +16,23 @@ function ToastContainer(props: Props) {
   const [hoverState, setHoverState] = useState(false)
   const [heightMap, setHeightMap] = useState(new Map<string, number>())
 
-  const onEnter = (key: string, height: number) => {
+  const onEnter = useMemoizedFn((key: string, height: number) => {
     setHeightMap((prev) => {
       prev.set(key, height)
       return new Map(prev)
     })
-  }
+  })
 
-  const onUpdate = onEnter
+  const onUpdate = useMemoizedFn(onEnter)
 
-  const onExited = (key: string) => {
+  const onExited = useMemoizedFn((key: string) => {
     setHeightMap((prev) => {
       prev.delete(key)
       return new Map(prev)
     })
-  }
+  })
 
-  const offsetHeight = (toast: InternalToastOptions) => {
+  const offsetHeight = useMemoizedFn((toast: InternalToastOptions) => {
     const index = toasts.findIndex((t) => t.key === toast.key)
 
     let offset = 0
@@ -44,7 +45,7 @@ function ToastContainer(props: Props) {
     }
 
     return offset
-  }
+  })
 
   return (
     <div

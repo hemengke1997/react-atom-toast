@@ -19,10 +19,12 @@ npm i react-atom-toast
 ```tsx
 import { toast } from 'react-atom-toast'
 
-// toast is headless, you'd customize it yourself
+// toast is headless and styleless, you'd customize it yourself
 toast.setDefaultOptions({
   className: 'bg-red p-2 rounded',
 })
+
+toast.open('Hello, world!')
 ```
 
 ### Transition

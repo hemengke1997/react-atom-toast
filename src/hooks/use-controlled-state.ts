@@ -1,5 +1,6 @@
-import { useMemo, useRef } from 'react'
-import { isFunction } from '../utils'
+import { useEffect, useMemo, useRef } from 'react'
+import { isFunction } from '@/utils'
+import useMemoizedFn from './use-memoized-fn'
 import usePrevious from './use-previous'
 import useUpdate from './use-update'
 
@@ -9,19 +10,25 @@ export default function useControlledState<T>(option: {
   onChange?: (value: T, prevValue: T) => void
   beforeValue?: (value: T, prevValue: T) => T | undefined
   postValue?: (value: T | undefined, prevValue: T) => T | undefined
+  onInit?: (value: T) => void
 }): [T, (value: T | ((prevState: T) => T)) => void, T] {
-  const { defaultValue, value, onChange, beforeValue, postValue } = option
+  const { defaultValue, value, onChange, beforeValue, postValue, onInit } = option
 
   const isControlled = Object.prototype.hasOwnProperty.call(option, 'value') && typeof value !== 'undefined'
 
   const initialValue = useMemo(() => {
+    let init = value
     if (isControlled) {
-      return value
+      init = value
+    } else if (defaultValue !== undefined) {
+      init = isFunction(defaultValue) ? defaultValue() : defaultValue
     }
-    if (defaultValue !== undefined) {
-      return isFunction(defaultValue) ? defaultValue() : defaultValue
-    }
+    return init
   }, [])
+
+  useEffect(() => {
+    onInit?.(initialValue as T)
+  }, [initialValue])
 
   const stateRef = useRef(initialValue)
 
@@ -40,7 +47,7 @@ export default function useControlledState<T>(option: {
 
   const update = useUpdate()
 
-  const triggerChange = (newValue: T | ((prevState: T) => T)) => {
+  function triggerChange(newValue: T | ((prevState: T) => T)) {
     let r = isFunction(newValue) ? newValue(stateRef.current as T) : newValue
 
     if (beforeValue) {
@@ -60,5 +67,5 @@ export default function useControlledState<T>(option: {
     }
   }
 
-  return [stateRef.current as T, triggerChange, previousState as T]
+  return [stateRef.current as T, useMemoizedFn(triggerChange), previousState as T]
 }

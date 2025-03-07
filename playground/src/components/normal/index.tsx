@@ -6,9 +6,7 @@ export default function Normal() {
     <Card title={'Default Toast'}>
       <Button
         onClick={() => {
-          toast.open({
-            content: `Hello, world! ${Math.random()}`,
-          })
+          toast.open(`Hello, world! ${Math.random()}`)
         }}
       >
         open

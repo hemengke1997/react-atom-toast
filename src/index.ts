@@ -1,3 +1,4 @@
+import type React from 'react'
 import { ToastQueue } from './toast-queue'
 import { type Options, type ToastOptions, type ToastUpdateOptions } from './types'
 import { omitUndefined } from './utils'
@@ -18,7 +19,14 @@ class Toast {
     this.toastQueue = new ToastQueue()
   }
 
-  open(options: ToastOptions) {
+  open(options: ToastOptions | React.ReactNode) {
+    if (!(options && typeof options === 'object' && 'content' in options)) {
+      // options is ReactNode
+      options = {
+        content: options,
+      }
+    }
+
     this.toastQueue.add({
       ...this.defaultOptions,
       ...options,

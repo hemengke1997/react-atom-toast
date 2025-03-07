@@ -1,13 +1,13 @@
 import { type CSSProperties, type ReactNode } from 'react'
-import { type PresetTransitionName } from 'react-transition-preset'
+import { type TransitionName } from 'react-transition-preset/types'
 
 export interface Options {
   duration?: number
   onClosed?: () => void
   transition?:
-    | PresetTransitionName
+    | TransitionName
     | {
-        name?: PresetTransitionName
+        name?: TransitionName
         duration?: number
         exitDuration?: number
       }

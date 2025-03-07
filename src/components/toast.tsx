@@ -1,9 +1,10 @@
 import { useRef } from 'react'
 import { Transition } from 'react-transition-preset'
-import useControlledState from '../hooks/use-controlled-state'
-import useIsomorphicLayoutEffect from '../hooks/use-isomorphic-layout-effect'
-import { type InternalToastOptions } from '../types'
-import { classnames } from '../utils'
+import useControlledState from '@/hooks/use-controlled-state'
+import useIsomorphicLayoutEffect from '@/hooks/use-isomorphic-layout-effect'
+import useMemoizedFn from '@/hooks/use-memoized-fn'
+import { type InternalToastOptions } from '@/types'
+import { classnames } from '@/utils'
 
 type Props = InternalToastOptions & {
   onOpenChange: (open: boolean) => void
@@ -35,7 +36,7 @@ function Toast(props: Props) {
 
   const didMount = useRef(false)
 
-  const transition = () => {
+  const transition = useMemoizedFn(() => {
     if (typeof _transition === 'string') {
       return { transition: _transition }
     }
@@ -44,7 +45,7 @@ function Toast(props: Props) {
       duration: _transition?.duration,
       exitDuration: _transition?.exitDuration,
     }
-  }
+  })
 
   const timer = useRef<number>()
   const ref = useRef<HTMLDivElement>(null)
@@ -56,7 +57,7 @@ function Toast(props: Props) {
     },
   })
 
-  const delayClear = () => {
+  const delayClear = useMemoizedFn(() => {
     if (duration) {
       timer.current && clearTimeout(timer.current)
       timer.current = window.setTimeout(() => {
@@ -64,46 +65,46 @@ function Toast(props: Props) {
         timer.current && clearTimeout(timer.current)
       }, +duration!)
     }
-  }
+  })
 
-  const onMouseHover = (hover: boolean) => {
+  const onMouseHover = useMemoizedFn((hover: boolean) => {
     if (!pauseOnHover || !open) return
     if (hover) {
       timer.current && clearTimeout(timer.current)
     } else {
       delayClear()
     }
-  }
+  })
 
   useIsomorphicLayoutEffect(() => {
     onMouseHover(hover)
   }, [hover])
 
-  const onEnter = () => {
+  const onEnter = useMemoizedFn(() => {
     if (!ref.current) return
     const height = ref.current.clientHeight
     _onEnter(height)
-  }
+  })
 
-  const onUpdate = () => {
+  const onUpdate = useMemoizedFn(() => {
     const height = ref.current?.clientHeight
     _onUpdate(height || 0)
-  }
+  })
 
-  const onExited = () => {
+  const onExited = useMemoizedFn(() => {
     const height = ref.current?.clientHeight
     _onExited(height || 0)
     onClosed?.()
-  }
+  })
 
-  const resolveTransform = (transform: string | undefined, offsetHeight: number) => {
+  const resolveTransform = useMemoizedFn((transform: string | undefined, offsetHeight: number) => {
     const internalTransform = `translate(-50%, calc(-50% - ${offsetHeight}px))`
     return [internalTransform, transform].filter(Boolean).join(' ')
-  }
+  })
 
-  const resolveTransformProperty = (transform: string | undefined) => {
+  const resolveTransformProperty = useMemoizedFn((transform: string | undefined) => {
     return [...new Set(['transform', transform])].filter(Boolean).join(', ')
-  }
+  })
 
   useIsomorphicLayoutEffect(() => {
     if (!open) return

@@ -1,9 +1,7 @@
 import { useCallback, useState } from 'react'
 
-const useUpdate = () => {
+export const useUpdate = () => {
   const [, setState] = useState({})
 
   return useCallback(() => setState({}), [])
 }
-
-export default useUpdate

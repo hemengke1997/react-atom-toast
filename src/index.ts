@@ -1,11 +1,11 @@
 import type React from 'react'
 import { ToastQueue } from './toast-queue'
 import { type Options, type ToastOptions, type ToastUpdateOptions } from './types'
-import { omitUndefined } from './utils'
+import { defaults } from './utils'
 
 class Toast {
   private defaultOptions: Options = {
-    duration: 2000,
+    duration: 2,
     pauseOnHover: true,
     transition: 'fade',
     maxCount: 3,
@@ -19,7 +19,7 @@ class Toast {
     this.toastQueue = new ToastQueue()
   }
 
-  open(options: ToastOptions | React.ReactNode) {
+  open = (options: ToastOptions | React.ReactNode) => {
     if (!(options && typeof options === 'object' && 'content' in options)) {
       // options is ReactNode
       options = {
@@ -27,31 +27,25 @@ class Toast {
       }
     }
 
-    this.toastQueue.add({
-      ...this.defaultOptions,
-      ...options,
-    })
+    this.toastQueue.add(defaults(options, this.defaultOptions))
   }
 
-  close(key: string) {
+  close = (key: string) => {
     this.toastQueue.close(key)
   }
 
-  closeAll() {
+  closeAll = () => {
     this.toastQueue.closeAll()
   }
 
-  update(key: string, options: ToastUpdateOptions) {
+  update = (key: string, options: ToastUpdateOptions) => {
     this.toastQueue.update(key, {
       ...options,
     })
   }
 
-  setDefaultOptions(options: Options) {
-    this.defaultOptions = {
-      ...this.defaultOptions,
-      ...omitUndefined(options),
-    }
+  setDefaultOptions = (options: Options) => {
+    this.defaultOptions = defaults(options, this.defaultOptions)
   }
 }
 

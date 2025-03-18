@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { isFunction } from '@/utils'
-import useMemoizedFn from './use-memoized-fn'
-import usePrevious from './use-previous'
-import useUpdate from './use-update'
+import { useMemoizedFn } from './use-memoized-fn'
+import { usePrevious } from './use-previous'
+import { useUpdate } from './use-update'
 
-export default function useControlledState<T>(option: {
+export function useControlledState<T>(option: {
   defaultValue?: T | (() => T)
   value?: T
   onChange?: (value: T, prevValue: T) => void

@@ -11,7 +11,7 @@ export default function Single() {
             maxCount: 1,
             transition: {
               name: 'fade',
-              duration: 1000,
+              duration: 1,
             },
           })
         }}

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import useMemoizedFn from '@/hooks/use-memoized-fn'
+import { useMemoizedFn } from '@/hooks/use-memoized-fn'
 import { type InternalToastOptions } from '../types'
 import { omit } from '../utils'
 import Toast from './toast'

@@ -53,12 +53,12 @@ toast({
 
 ## Options
 
-### duration
+### duration (s)
 
 - **Type:** `number`
-- **Default:** `2000`
+- **Default:** `2`
 
-The duration of the toast.
+The duration of the toast (s).
 
 ### className
 
@@ -84,7 +84,7 @@ toast.setDefaultOptions({
         duration?: number
         exitDuration?: number
       }`
-- **Default:** `fade-up`
+- **Default:** `fade`
 
 The transition of the toast. Read [react-transition-preset](https://github.com/hemengke1997/react-transition-preset) to learn more.
 

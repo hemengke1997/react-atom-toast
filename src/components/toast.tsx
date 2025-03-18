@@ -1,8 +1,8 @@
 import { useRef } from 'react'
 import { Transition } from 'react-transition-preset'
-import useControlledState from '@/hooks/use-controlled-state'
-import useIsomorphicLayoutEffect from '@/hooks/use-isomorphic-layout-effect'
-import useMemoizedFn from '@/hooks/use-memoized-fn'
+import { useControlledState } from '@/hooks/use-controlled-state'
+import { useIsomorphicLayoutEffect } from '@/hooks/use-isomorphic-layout-effect'
+import { useMemoizedFn } from '@/hooks/use-memoized-fn'
 import { type InternalToastOptions } from '@/types'
 import { classnames } from '@/utils'
 
@@ -57,13 +57,15 @@ function Toast(props: Props) {
     },
   })
 
+  const secToMs = useMemoizedFn((sec: number | undefined) => (sec || 0) * 1000)
+
   const delayClear = useMemoizedFn(() => {
     if (duration) {
       timer.current && clearTimeout(timer.current)
       timer.current = window.setTimeout(() => {
         setOpen(false)
         timer.current && clearTimeout(timer.current)
-      }, +duration!)
+      }, secToMs(duration))
     }
   })
 

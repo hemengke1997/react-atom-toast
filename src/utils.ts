@@ -16,9 +16,12 @@ export function classnames(...args: (string | undefined)[]) {
   return args.filter(Boolean).join(' ')
 }
 
-export function omitUndefined<T extends Record<string, any>>(obj: T) {
-  return omit(
-    obj,
-    Object.keys(obj).filter((key) => obj[key] === undefined),
-  )
+export function defaults<T extends Record<string, any>>(options: T, defaultOptions: T): T {
+  const result = { ...defaultOptions }
+  for (const key in options) {
+    if (options[key] !== undefined) {
+      result[key] = options[key]
+    }
+  }
+  return result
 }

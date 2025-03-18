@@ -1,3 +1,12 @@
+# [2.0.0](https://github.com/hemengke1997/react-atom-toast/compare/v1.4.0...v2.0.0) (2025-03-18)
+
+
+### Features
+
+* **!:**  use seconds consistently (most UI libraries use seconds instead of milliseconds, such as motion/antd) ([068a1ec](https://github.com/hemengke1997/react-atom-toast/commit/068a1ec0cf782c4b86ea8f609ce5fe23b66af7c0))
+
+
+
 # [1.4.0](https://github.com/hemengke1997/react-atom-toast/compare/v1.3.3...v1.4.0) (2025-03-07)
 
 

@@ -4,7 +4,7 @@ import { useControlledState } from '@/hooks/use-controlled-state'
 import { useIsomorphicLayoutEffect } from '@/hooks/use-isomorphic-layout-effect'
 import { useMemoizedFn } from '@/hooks/use-memoized-fn'
 import { type InternalToastOptions } from '@/types'
-import { classnames } from '@/utils'
+import { classnames, secToMs } from '@/utils'
 
 type Props = InternalToastOptions & {
   onOpenChange: (open: boolean) => void
@@ -56,8 +56,6 @@ function Toast(props: Props) {
       onOpenChange(value)
     },
   })
-
-  const secToMs = useMemoizedFn((sec: number | undefined) => (sec || 0) * 1000)
 
   const delayClear = useMemoizedFn(() => {
     if (duration) {

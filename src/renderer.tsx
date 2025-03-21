@@ -37,6 +37,10 @@ export class Renderer {
     this.createContainer()
     if (!this.container) return
 
+    this.reactMount(toasts, this.container)
+  }
+
+  reactMount(toasts: InternalToastOptions[], container: HTMLElement) {
     mount(
       <ToastContainer
         toasts={toasts}
@@ -45,7 +49,7 @@ export class Renderer {
           this.queue.update(key, { open })
         }}
       />,
-      this.container,
+      container,
     )
   }
 }

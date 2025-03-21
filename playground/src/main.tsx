@@ -9,7 +9,7 @@ ReactDOM.createRoot(document.querySelector('#root') as HTMLElement).render(
     <ConfigProvider
       theme={{
         cssVar: true,
-        algorithm: [theme.defaultAlgorithm],
+        algorithm: [theme.darkAlgorithm],
       }}
     >
       <App />

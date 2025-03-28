@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { useMemoizedFn } from '@/hooks/use-memoized-fn'
 import { type InternalToastOptions } from '../types'
 import { omit } from '../utils'
@@ -57,30 +57,31 @@ function ToastContainer(props: Props) {
       }}
       className={'toast__container'}
     >
-      {toasts.map((toast) =>
-        toast.render!(
-          <Toast
-            {...omit(toast, ['key'])}
-            key={toast.key}
-            onOpenChange={(open) => onOpenChange(toast.key!, open)}
-            onEnter={(height) => {
-              onEnter(toast.key!, height)
-            }}
-            onUpdate={(height) => {
-              onUpdate(toast.key!, height)
-            }}
-            onExited={() => {
-              onExited(toast.key!)
-            }}
-            onClosed={() => {
-              toast.onClosed?.()
-              onClosed(toast.key!)
-            }}
-            hover={hoverState}
-            offsetHeight={offsetHeight(toast)}
-          />,
-        ),
-      )}
+      {toasts.map((toast) => (
+        <Fragment key={toast.key}>
+          {toast.render!(
+            <Toast
+              {...omit(toast, ['key'])}
+              onOpenChange={(open) => onOpenChange(toast.key!, open)}
+              onEnter={(height) => {
+                onEnter(toast.key!, height)
+              }}
+              onUpdate={(height) => {
+                onUpdate(toast.key!, height)
+              }}
+              onExited={() => {
+                onExited(toast.key!)
+              }}
+              onClosed={() => {
+                toast.onClosed?.()
+                onClosed(toast.key!)
+              }}
+              hover={hoverState}
+              offsetHeight={offsetHeight(toast)}
+            />,
+          )}
+        </Fragment>
+      ))}
     </div>
   )
 }

@@ -1,7 +1,3 @@
-/**
- * @vitest-environment happy-dom
- */
-
 import { beforeEach, describe, expect, it, type MockInstance, vi } from 'vitest'
 import { Renderer } from '@/renderer'
 import { Toast } from '@/Toast'

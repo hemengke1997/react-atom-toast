@@ -1,8 +1,9 @@
 import { useRef } from 'react'
 import { Transition } from 'react-transition-preset'
 import { useControlledState } from '@/hooks/use-controlled-state'
-import { useIsomorphicLayoutEffect } from '@/hooks/use-isomorphic-layout-effect'
+import { useIsoLayoutEffect } from '@/hooks/use-iso-layout-effect'
 import { useMemoizedFn } from '@/hooks/use-memoized-fn'
+import { useUpdateIsoLayoutEffect } from '@/hooks/use-update-iso-layout-effect'
 import { type InternalToastOptions } from '@/types'
 import { classnames, secToMs } from '@/utils'
 
@@ -76,7 +77,7 @@ function Toast(props: Props) {
     }
   })
 
-  useIsomorphicLayoutEffect(() => {
+  useUpdateIsoLayoutEffect(() => {
     onMouseHover(hover)
   }, [hover])
 
@@ -106,7 +107,7 @@ function Toast(props: Props) {
     return [...new Set(['transform', transform])].filter(Boolean).join(', ')
   })
 
-  useIsomorphicLayoutEffect(() => {
+  useIsoLayoutEffect(() => {
     if (!open) return
 
     if (!didMount.current) {
@@ -114,13 +115,14 @@ function Toast(props: Props) {
     } else {
       onUpdate()
     }
+
     delayClear()
     return () => {
       timer.current && clearTimeout(timer.current)
     }
   }, [updateFlag])
 
-  useIsomorphicLayoutEffect(() => {
+  useIsoLayoutEffect(() => {
     if (!content) {
       onExited()
     }

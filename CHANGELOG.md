@@ -1,3 +1,7 @@
+## [2.0.4](https://github.com/hemengke1997/react-atom-toast/compare/v2.0.3...v2.0.4) (2025-04-07)
+
+
+
 ## [2.0.3](https://github.com/hemengke1997/react-atom-toast/compare/v2.0.2...v2.0.3) (2025-04-07)
 
 

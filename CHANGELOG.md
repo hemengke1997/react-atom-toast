@@ -1,3 +1,12 @@
+## [2.0.3](https://github.com/hemengke1997/react-atom-toast/compare/v2.0.2...v2.0.3) (2025-04-07)
+
+
+### Bug Fixes
+
+* pause on hover with dynamic update ([59d6d4e](https://github.com/hemengke1997/react-atom-toast/commit/59d6d4ee312f4b5a8ecb7746a593866979c852c2))
+
+
+
 ## [2.0.2](https://github.com/hemengke1997/react-atom-toast/compare/v2.0.1...v2.0.2) (2025-03-28)
 
 

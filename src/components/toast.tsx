@@ -59,6 +59,13 @@ function Toast(props: Props) {
   })
 
   const delayClear = useMemoizedFn(() => {
+    if (pauseOnHover) {
+      if (hover) {
+        timer.current && clearTimeout(timer.current)
+        return
+      }
+    }
+
     if (duration) {
       timer.current && clearTimeout(timer.current)
       timer.current = window.setTimeout(() => {
@@ -68,17 +75,9 @@ function Toast(props: Props) {
     }
   })
 
-  const onMouseHover = useMemoizedFn((hover: boolean) => {
-    if (!pauseOnHover || !open) return
-    if (hover) {
-      timer.current && clearTimeout(timer.current)
-    } else {
-      delayClear()
-    }
-  })
-
   useUpdateIsoLayoutEffect(() => {
-    onMouseHover(hover)
+    if (!open) return
+    delayClear()
   }, [hover])
 
   const onEnter = useMemoizedFn(() => {

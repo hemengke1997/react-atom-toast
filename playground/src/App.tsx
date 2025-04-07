@@ -1,5 +1,6 @@
 import { toast } from 'react-atom-toast'
 import Classname from './components/classname'
+import ClickUpdate from './components/click-update'
 import Closable from './components/closable'
 import Normal from './components/normal'
 import Single from './components/single'
@@ -24,6 +25,7 @@ function App() {
         <Classname />
         <Closable />
         <Update />
+        <ClickUpdate />
       </div>
     </div>
   )

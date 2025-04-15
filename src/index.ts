@@ -3,5 +3,5 @@ import { type Options, type ToastOptions, type ToastUpdateOptions } from './type
 
 const toast = new Toast()
 
-export { toast }
+export { toast, Toast }
 export { type ToastOptions, type Options, type ToastUpdateOptions }

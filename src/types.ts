@@ -46,7 +46,7 @@ export interface Options {
   /**
    * @description The class name of the toast.
    *
-   * react-atom-toast is headless, you need to style it yourself.
+   * react-atom-toast is headless, you need to style it
    */
   className?: string
   style?: CSSProperties

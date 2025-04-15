@@ -1,8 +1,8 @@
 # react-atom-toast
 
-> Lightweight and headless React Toast
+> 轻量无头的 React Toast
 
-## Installation
+## 安装
 
 ```bash
 npm i react-atom-toast
@@ -10,16 +10,16 @@ npm i react-atom-toast
 
 ## Demo
 
-[Online Example](https://hemengke1997.github.io/react-atom-toast/)
+[在线示例](https://hemengke1997.github.io/react-atom-toast/)
 
-## Usage
+## 使用
 
-### Basic Usage
+### 基础使用
 
 ```tsx
 import { toast } from 'react-atom-toast'
 
-// By default, toast has no styles. You need to add your own styles.
+// toast默认没有样式，需要您自己添加样式
 toast.setDefaultOptions({
   className: 'bg-red p-2 rounded',
 })
@@ -27,9 +27,9 @@ toast.setDefaultOptions({
 toast.open('Hello, world!')
 ```
 
-### Transition Animations
+### 过渡动画
 
-Transition animations are powered by [react-transition-preset](https://github.com/hemengke1997/react-transition-preset).
+过渡动画由 [react-transition-preset](https://github.com/hemengke1997/react-transition-preset) 驱动
 
 ```tsx
 import { toast } from 'react-atom-toast'
@@ -40,7 +40,7 @@ toast({
 })
 ```
 
-### Singleton
+### 单例
 
 ```tsx
 import { toast } from 'react-atom-toast'
@@ -51,22 +51,22 @@ toast({
 })
 ```
 
-## Options
+## 配置项
 
 ### duration (s)
 
 - **Type:** `number`
 - **Default:** `2`
 
-The duration for which the toast is displayed.
+toast 持续时长
 
 ### className
 
 - **Type:** `string`
 
-CSS class name.
+样式类名
 
-By default, toast has no styles. You need to add your own styles.
+toast 是无样式的，需要您自己添加样式
 
 ```tsx
 import { toast } from 'react-atom-toast'
@@ -86,40 +86,41 @@ toast.setDefaultOptions({
       }`
 - **Default:** `fade`
 
-Transition animation. For detailed configuration, refer to [react-transition-preset](https://github.com/hemengke1997/react-transition-preset).
+过渡动画，配置项详情参考 [react-transition-preset](https://github.com/hemengke1997/react-transition-preset)
 
 ### pauseOnHover
 
 - **Type:** `boolean`
 - **Default:** `true`
 
-Prevents the toast from disappearing when hovered.
+hover时阻止toast消失
 
 ### maxCount
 
 - **Type:** `number`
 - **Default:** `3`
 
-The maximum number of toasts displayed simultaneously.
+同时最多显示的toast数量
 
-If set to `1`, new toasts will replace old ones.
+如果设置为 `1`，新的toast会替换旧的toast
 
 ### gap
 
 - **Type:** `number`
 - **Default:** `16`
 
-The gap between toasts, defaulting to `16px`.
+toast 之间的间距，默认为 `16px`
+
 
 ### render
 
 - **Type:** `(children: ReactNode) => ReactNode`
 
-Enhances rendering, typically used with React context.
+渲染增强，通常用于react context
 
-## Extensions
+## 扩展
 
-Although `react-atom-toast` exports a `toast` instance, you can also extend the `Toast` class yourself. For example:
+虽然 `react-atom-toast` 导出了toast实例，但是您也可以自行扩展 `Toast` 类，比如：
 
 ```ts
 import { Toast } from 'react-atom-toast'
@@ -145,3 +146,4 @@ class MyToast extends Toast {
     })
   }
 }
+```

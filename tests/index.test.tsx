@@ -1,7 +1,7 @@
 import { act, cleanup, render } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { toast, type ToastOptions } from '../src'
+import { Toast, toast, type ToastOptions } from '../src'
 
 const TestComponent = (props: ToastOptions) => {
   return (
@@ -216,5 +216,51 @@ describe('Toast', () => {
     })
 
     expect(onClosed).toHaveBeenCalled()
+  })
+
+  it('extension Toast class', () => {
+    const content = 'Hello, world!'
+
+    class MyToast extends Toast {
+      constructor() {
+        super()
+      }
+      info() {
+        this.open({
+          content,
+          className: 'info-class',
+          style: {
+            color: 'blue',
+          },
+        })
+      }
+    }
+
+    const myToast = new MyToast()
+
+    const TestComponent = () => {
+      return (
+        <button
+          data-testid='button'
+          onClick={() => {
+            act(() => {
+              myToast.info()
+            })
+          }}
+        >
+          Open
+        </button>
+      )
+    }
+
+    const { queryByTestId, queryByText } = render(<TestComponent />)
+
+    act(() => {
+      queryByTestId('button')?.click()
+    })
+
+    expect(queryByText(content)).toBeTruthy()
+    expect(queryByText(content)?.className).toContain('info-class')
+    expect(window.getComputedStyle(queryByText(content)!).color).toBe('rgb(0, 0, 255)')
   })
 })

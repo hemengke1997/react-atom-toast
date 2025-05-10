@@ -1,3 +1,17 @@
+## [2.0.5](https://github.com/hemengke1997/react-atom-toast/compare/v2.0.4...v2.0.5) (2025-05-10)
+
+
+### Bug Fixes
+
+* pauseOnHover为false时hover依然触发 ([11a388b](https://github.com/hemengke1997/react-atom-toast/commit/11a388bcbe9503e5e98822fc6ce784bdbe882893))
+
+
+### Features
+
+* 导出Toast类便于开发者扩展 ([f0a8395](https://github.com/hemengke1997/react-atom-toast/commit/f0a839594a1cfccc3bd00ce8d25890ae3cdc0c05))
+
+
+
 ## [2.0.4](https://github.com/hemengke1997/react-atom-toast/compare/v2.0.3...v2.0.4) (2025-04-07)
 
 

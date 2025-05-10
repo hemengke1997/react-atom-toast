@@ -55,7 +55,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
     "@minko-fe/commitlint-config": "^2.1.2",
-    "@minko-fe/eslint-config": "^4.2.1",
+    "@minko-fe/eslint-config": "^4.2.2",
     "@minko-fe/prettier-config": "^2.2.5",
     "@minko-fe/tsconfig": "^2.1.1",
     "@testing-library/react": "^16.2.0",
